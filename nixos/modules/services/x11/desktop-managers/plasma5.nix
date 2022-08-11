@@ -170,10 +170,9 @@ in
     supportDDC = mkOption {
       type = types.bool;
       default = false;
-      description = ''
+      description = lib.mdDoc ''
         Support setting monitor brightness via DDC.
-        </para>
-        <para>
+
         This is not needed for controlling brightness of the internal monitor
         of a laptop and as it is considered experimental by upstream, it is
         disabled by default.
@@ -189,7 +188,7 @@ in
     runUsingSystemd = mkOption {
       description = lib.mdDoc "Use systemd to manage the Plasma session";
       type = types.bool;
-      default = false;
+      default = true;
     };
 
     excludePackages = mkOption {

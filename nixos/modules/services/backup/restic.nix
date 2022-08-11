@@ -227,7 +227,7 @@ in
           type = types.package;
           default = pkgs.restic;
           defaultText = literalExpression "pkgs.restic";
-          description = ''
+          description = lib.mdDoc ''
             Restic package to use.
           '';
         };
@@ -321,7 +321,7 @@ in
               ''}
             '';
           } // optionalAttrs (backup.dynamicFilesFrom != null || backup.backupCleanupCommand != null) {
-            postStart = ''
+            postStop = ''
               ${optionalString (backup.backupCleanupCommand != null) ''
                 ${pkgs.writeScript "backupCleanupCommand" backup.backupCleanupCommand}
               ''}

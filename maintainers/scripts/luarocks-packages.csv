@@ -39,11 +39,13 @@ lua-cmsgpack,,,,,,
 lua-iconv,,,,,,
 lua-lsp,,,,,,
 lua-messagepack,,,,,,
+lua-protobuf,,,,,,lockejan
 lua-resty-http,,,,,,
 lua-resty-jwt,,,,,,
 lua-resty-openidc,,,,,,
 lua-resty-openssl,,,,,,
 lua-resty-session,,,,,,
+lua-subprocess,https://github.com/0x0ade/lua-subprocess,,,,lua5_1,scoder12
 lua-term,,,,,,
 lua-toml,,,,,,
 lua-zlib,,,,,,koral
@@ -70,6 +72,7 @@ luasql-sqlite3,,,,,,vyp
 luassert,,,,,,
 luasystem,,,,,,
 luaunbound,,,,,
+luaunit,,,,,,lockejan
 luautf8,,,,,,pstn
 luazip,,,,,,
 lua-yajl,,,,,,pstn

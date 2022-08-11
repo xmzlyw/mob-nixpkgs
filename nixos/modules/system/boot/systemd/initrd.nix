@@ -103,7 +103,8 @@ let
   fstab = pkgs.writeText "initrd-fstab" (lib.concatMapStringsSep "\n"
     ({ fsType, mountPoint, device, options, autoFormat, autoResize, ... }@fs: let
         opts = options ++ optional autoFormat "x-systemd.makefs" ++ optional autoResize "x-systemd.growfs";
-      in "${device} /sysroot${mountPoint} ${fsType} ${lib.concatStringsSep "," opts}") fileSystems);
+        finalDevice = if (lib.elem "bind" options) then "/sysroot${device}" else device;
+      in "${finalDevice} /sysroot${mountPoint} ${fsType} ${lib.concatStringsSep "," opts}") fileSystems);
 
   needMakefs = lib.any (fs: fs.autoFormat) fileSystems;
   needGrowfs = lib.any (fs: fs.autoResize) fileSystems;
@@ -372,6 +373,9 @@ in {
           ${pkgs.buildPackages.perl}/bin/perl -0pe 's/## file: iwlwifi.conf(.+?)##/##/s;' $src > $out
         '';
         "/etc/modprobe.d/debian.conf".source = pkgs.kmod-debian-aliases;
+
+        "/etc/os-release".source = config.boot.initrd.osRelease;
+        "/etc/initrd-release".source = config.boot.initrd.osRelease;
 
       };
 

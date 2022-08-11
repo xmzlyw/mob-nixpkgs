@@ -714,6 +714,8 @@ in
             RemainAfterExit = true;
           };
 
+          path = lib.optionals (cfgExpandOnBoot == "all") [ cfgZfs.package ];
+
           script = ''
             for pool in ${poolListProvider}; do
               systemctl start --no-block "zpool-expand@$pool"
@@ -765,10 +767,10 @@ in
         description = "ZFS pools scrubbing";
         after = [ "zfs-import.target" ];
         serviceConfig = {
-          Type = "oneshot";
+          Type = "simple";
         };
         script = ''
-          ${cfgZfs.package}/bin/zpool scrub ${
+          ${cfgZfs.package}/bin/zpool scrub -w ${
             if cfgScrub.pools != [] then
               (concatStringsSep " " cfgScrub.pools)
             else

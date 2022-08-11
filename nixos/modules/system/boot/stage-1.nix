@@ -219,7 +219,7 @@ let
 
       # Strip binaries further than normal.
       chmod -R u+w $out
-      stripDirs "$STRIP" "lib bin" "-s"
+      stripDirs "$STRIP" "$RANLIB" "lib bin" "-s"
 
       # Run patchelf to make the programs refer to the copied libraries.
       find $out/bin $out/lib -type f | while read i; do
@@ -480,7 +480,7 @@ in
         if you want to resume from file. If left empty, the swap partitions are used.
         Specify here the device where the file resides.
         You should also use <varname>boot.kernelParams</varname> to specify
-        <literal><replaceable>resume_offset</replaceable></literal>.
+        <literal>«resume_offset»</literal>.
       '';
     };
 
